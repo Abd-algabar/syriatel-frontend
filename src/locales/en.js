@@ -82,41 +82,124 @@ const en = {
     chooseFile: "Choose File",
     noFile: "No file chosen",
     pdfHint: "PDF only",
+    img: "Image only",
+    imgOrPdf: "Image or PDF only",
     submit: "Submit Application",
     submitting: "Submitting...",
     yes: "Yes",
     no: "No",
     cityOptions: [
-      "Damascus",
-      "Damascus Rural",
-      "Aleppo",
-      "Lattakia",
-      "Tartous",
-      "Homs",
-      "Hama",
-      "Hasaka",
-      "Jableh",
-      "Suwaidaa",
-      "Qamishli",
-      "Deir Ezzor",
-      "Idleb",
-      "Rakka",
-      "Dara’a",
-      "Quneitra",
+      {
+        value: "damascus",
+        label: "Damascus",
+      },
+      {
+        value: "rural damascus",
+        label: "Damascus Rural",
+      },
+      {
+        value: "aleppo",
+        label: "Aleppo",
+      },
+      {
+        value: "latakia",
+        label: "Lattakia",
+      },
+      {
+        value: "tartus",
+        label: "Tartous",
+      },
+      {
+        value: "homs",
+        label: "Homs",
+      },
+      {
+        value: "hama",
+        label: "Hama",
+      },
+      {
+        value: "hasakah",
+        label: "Hasaka",
+      },
+      {
+        value: "jableh",
+        label: "Jableh",
+      },
+      {
+        value: "as sweida",
+        label: "Suwaidaa",
+      },
+      {
+        value: "qamishli",
+        label: "Qamishli",
+      },
+      {
+        value: "deir ez zor",
+        label: "Deir Ezzor",
+      },
+      {
+        value: "idlib",
+        label: "Idleb",
+      },
+      {
+        value: "raqqa",
+        label: "Rakka",
+      },
+      {
+        value: "dara",
+        label: "Dara’a",
+      },
+      {
+        value: "quneitra",
+        label: "Quneitra",
+      },
     ],
+
     fieldOptions: [
-      "IT & Software Engineering",
-      "Computers & Automation Engineering",
-      "Telecommunications Engineering",
-      "AI & IoT Engineering",
-      "Civil Engineering",
-      "Business Administration",
-      "Graphic Design",
+      {
+        value: "IT & Software Engineering",
+        label: "IT & Software Engineering",
+      },
+      {
+        value: "Computers & Automation Engineering",
+        label: "Computers & Automation Engineering",
+      },
+      {
+        value: "Telecommunications Engineering",
+        label: "Telecommunications Engineering",
+      },
+      {
+        value: "AI & IoT Engineering",
+        label: "AI & IoT Engineering",
+      },
+      {
+        value: "Civil Engineering",
+        label: "Civil Engineering",
+      },
+      {
+        value: "Business Administration",
+        label: "Business Administration",
+      },
+      {
+        value: "Graphic Design",
+        label: "Graphic Design",
+      },
     ],
-    yearOptions: ["Final Academic Year", "Graduated"],
+
+    yearOptions: [
+      {
+        value: "final year",
+        label: "Final Academic Year",
+      },
+      {
+        value: "graduated",
+        label: "Graduated",
+      },
+    ],
+
     sourceOptions: [
       "University Workshop",
-      "Social Media",
+      "social media",
       "Previous Internship",
       "Hi-Tech Exhibition",
     ],
@@ -131,10 +214,10 @@ const en = {
       skills: "e.g. React, Node.js, SQL, Networking...",
       comments: "Write any additional information here...",
     },
-success: {
-  title: "Your application has been submitted successfully",
-  message: "We have received your application. We will contact you soon."
-}
+    success: {
+      title: "Your application has been submitted successfully",
+      message: "We have received your application. We will contact you soon.",
+    },
   },
   footer: {
     rights: "© 2026 Syriatel. All rights reserved.",
@@ -142,90 +225,89 @@ success: {
     contact: "Contact",
   },
 
-
   faq: {
-  back: "Back to Home",
+    back: "Back to Home",
 
-  title: "Frequently Asked",
-  titleAccent: "Questions",
+    title: "Frequently Asked",
+    titleAccent: "Questions",
 
-  intro:
-    "Find answers to common questions about the training program, application process, and training experience.",
+    intro:
+      "Find answers to common questions about the training program, application process, and training experience.",
 
-  searchPlaceholder: "Search questions...",
+    searchPlaceholder: "Search questions...",
 
-  noResults: "No results found",
-  noResultsHint: "Try searching with different keywords.",
+    noResults: "No results found",
+    noResultsHint: "Try searching with different keywords.",
 
-  questions: [
-    {
-      question: "What is the Talent Development Program?",
-      answer:
-        "It is a training program designed to develop students' and graduates' skills through practical training, mentoring, and experience in a real work environment."
-    },
-    {
-      question: "Who can apply to the program?",
-      answer:
-        "Final-year students and graduates from the eligible fields specified in the program announcement can apply, according to the requirements of each training cycle."
-    },
-    {
-      question: "What documents are required for the application?",
-      answer:
-        "Applicants are required to upload their academic qualification, CV, national ID, and personal photo according to the required formats and size limits."
-    },
-    {
-      question: "Do I need to provide accurate information?",
-      answer:
-        "Yes. Applicants should provide accurate and complete information because the submitted data is used to review the application and communicate with the applicant."
-    },
-    {
-      question: "How can I know the status of my application?",
-      answer:
-        "Applicants are contacted regarding their application status and the next steps according to the program's procedures."
-    },
-    {
-      question: "Can I edit my application after submitting it?",
-      answer:
-        "This depends on the status of the application and the program's procedures. If you need to correct important information, contact the team responsible for the program."
-    },
-    {
-      question: "What happens after my application is accepted?",
-      answer:
-        "After acceptance, the registration process is completed and the trainee receives information about the training program, department, supervisor, and training schedule."
-    },
-    {
-      question: "How are trainees assigned to departments and supervisors?",
-      answer:
-        "Trainees are assigned by the program administration according to the training program and appropriate department, and each trainee is linked to a responsible supervisor."
-    },
-    {
-      question: "How can I see my assigned tasks?",
-      answer:
-        "After signing in, trainees can view their assigned tasks, follow their status, and access the details of each task."
-    },
-    {
-      question: "How are trainees evaluated?",
-      answer:
-        "Trainees are evaluated by their assigned supervisors based on their tasks and performance during the training period. Evaluation results are displayed according to the system's permissions."
-    },
-    {
-      question: "What should I do if I cannot attend?",
-      answer:
-        "Trainees can submit an absence request through the system. The request is then reviewed according to the program's procedures."
-    },
-    {
-      question: "Do announcements reach all trainees?",
-      answer:
-        "It depends on the announcement's target audience. Administrators can send announcements to trainees within the current training program or to a specific target group."
-    }
-  ],
+    questions: [
+      {
+        question: "What is the Talent Development Program?",
+        answer:
+          "It is a training program designed to develop students' and graduates' skills through practical training, mentoring, and experience in a real work environment.",
+      },
+      {
+        question: "Who can apply to the program?",
+        answer:
+          "Final-year students and graduates from the eligible fields specified in the program announcement can apply, according to the requirements of each training cycle.",
+      },
+      {
+        question: "What documents are required for the application?",
+        answer:
+          "Applicants are required to upload their academic qualification, CV, national ID, and personal photo according to the required formats and size limits.",
+      },
+      {
+        question: "Do I need to provide accurate information?",
+        answer:
+          "Yes. Applicants should provide accurate and complete information because the submitted data is used to review the application and communicate with the applicant.",
+      },
+      {
+        question: "How can I know the status of my application?",
+        answer:
+          "Applicants are contacted regarding their application status and the next steps according to the program's procedures.",
+      },
+      {
+        question: "Can I edit my application after submitting it?",
+        answer:
+          "This depends on the status of the application and the program's procedures. If you need to correct important information, contact the team responsible for the program.",
+      },
+      {
+        question: "What happens after my application is accepted?",
+        answer:
+          "After acceptance, the registration process is completed and the trainee receives information about the training program, department, supervisor, and training schedule.",
+      },
+      {
+        question: "How are trainees assigned to departments and supervisors?",
+        answer:
+          "Trainees are assigned by the program administration according to the training program and appropriate department, and each trainee is linked to a responsible supervisor.",
+      },
+      {
+        question: "How can I see my assigned tasks?",
+        answer:
+          "After signing in, trainees can view their assigned tasks, follow their status, and access the details of each task.",
+      },
+      {
+        question: "How are trainees evaluated?",
+        answer:
+          "Trainees are evaluated by their assigned supervisors based on their tasks and performance during the training period. Evaluation results are displayed according to the system's permissions.",
+      },
+      {
+        question: "What should I do if I cannot attend?",
+        answer:
+          "Trainees can submit an absence request through the system. The request is then reviewed according to the program's procedures.",
+      },
+      {
+        question: "Do announcements reach all trainees?",
+        answer:
+          "It depends on the announcement's target audience. Administrators can send announcements to trainees within the current training program or to a specific target group.",
+      },
+    ],
 
-  help: {
-    title: "Still have a question?",
-    message:
-      "If you could not find the answer you are looking for, contact the team responsible for the training program.",
-    button: "Back to Home"
-  }
-}
+    help: {
+      title: "Still have a question?",
+      message:
+        "If you could not find the answer you are looking for, contact the team responsible for the training program.",
+      button: "Back to Home",
+    },
+  },
 };
 export default en;

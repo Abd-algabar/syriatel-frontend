@@ -325,3 +325,10 @@
     transform: rotate(360deg);
   }
 }
+
+.pageLoading{
+  display :flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

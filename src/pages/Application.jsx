@@ -330,7 +330,7 @@
 //   }
 // }
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
@@ -345,6 +345,7 @@ import { toast } from "react-toastify";
 import styles from "./Application.module.css";
 import axios from "axios";
 import { Loader2 } from "lucide-react";
+import NotAvailable from "./NotAvailable";
 /*
  * Initial form state.
  * Keeping the initial state in one place makes
@@ -388,6 +389,10 @@ export default function Application() {
   const [files, setFiles] = useState(initialFiles);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pageLoading, setPageLoading] = useState(true);
+  const [formAvailable, setFormAvailable] = useState(false);
+  const [Group, setGroup] = useState("1");
+
   /*
    * Determine the correct arrow according to
    * the current language direction.
@@ -431,11 +436,30 @@ export default function Application() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-    const formData = new FormData(event.currentTarget);
-    formData.append("academicQualification", files.academicQualification);
+    const formData = new FormData();
+    formData.append("academic_qualification", files.academicQualification);
     formData.append("cv", files.cv);
-    formData.append("nationalID", files.nationalID);
-    formData.append("personalPhoto", files.personalPhoto);
+    formData.append("national_id", files.nationalID);
+    formData.append("personal_photo", files.personalPhoto);
+
+    formData.append("training_program_id", Group);
+
+    formData.append("full_name",form.fullname)
+    formData.append("email",form.email)
+    formData.append("phone_number",form.phoneNumber)
+    formData.append("birth_date",form.DateOfBirth)
+    formData.append("city",form.City)
+    formData.append("year_of_study",form.YearOfStudy)
+    formData.append("gpa",form.GPA)
+    formData.append("commitment",form.availability=='yes'?1:0)
+    formData.append("previous_training",form.previous=='yes'?1:0)
+    formData.append("how_heard",form.source)
+    formData.append("additional_info",form.comments)
+    formData.append("home_address",form.address)
+    formData.append("university",form.UniversityName)
+    formData.append("field_of_study",form.FieldOfStudy)
+    formData.append("academic_major",form.AcademicMajor)
+    formData.append("technical_skills",form.TechnicalSkills)
     console.log("FormData:", formData);
     console.group("================ APPLICATION DATA ================");
 
@@ -462,7 +486,7 @@ export default function Application() {
 
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/v1/applicants",
+        "https://syriateltms-production.up.railway.app/api/v1/application",
         formData,
       );
       console.log("res:", res);
@@ -471,6 +495,7 @@ export default function Application() {
     } catch (error) {
       // console.log(error);
       const message = error.response?.data?.message;
+      console.log(error.response?.data?.errors)
 
       if (Array.isArray(message)) {
         message.forEach((msg) => {
@@ -487,7 +512,7 @@ export default function Application() {
     } finally {
       setLoading(false);
     }
-    setSubmitted(true);
+    
 
     window.scrollTo({
       top: 0,
@@ -495,7 +520,42 @@ export default function Application() {
     });
   };
 
+  // check if the form is available for submission
+  const checkFormAvailability = async () => {
+    try {
+      const response = await axios.get(
+        "https://syriateltms-production.up.railway.app/api/v1/training_program/openProgram",
+      );
+      setFormAvailable(response.data.data==null?false:true);
+      console.log("checkdata",response.data.data)
+      setGroup(response.data.data?.id||" ");
+    }catch (error) {
+         const message = error.response?.data?.message;
+      console.log(message)
+      setFormAvailable(false);
+    }
+  }
+
+    useEffect(() => {
+    // Simulate a loading delay (e.g., fetching data)
+    checkFormAvailability();
+
+    const timer = setTimeout(() => {
+      setPageLoading(false);
+    }, 1000);
+
+    },[])
   /*
+   * Loading screen
+   */
+  if (pageLoading) {
+    return (
+        <div className={styles.pageLoading}>
+          <Loader2 size={60} color="red" className={styles.spinner} />
+        </div>
+    )
+  }
+   /*
    * Success screen
    */
   if (submitted) {
@@ -516,7 +576,7 @@ export default function Application() {
     );
   }
 
-  return (
+  return formAvailable  ? (
     <main className={styles.page}>
       <div className={styles.container}>
         {/* Back to home */}
@@ -534,6 +594,7 @@ export default function Application() {
           </h1>
 
           <p>{t("form.intro")}</p>
+          <p>Group: {Group}</p>
         </header>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -665,6 +726,7 @@ export default function Application() {
               file={files.academicQualification}
               onChange={handleFileChange}
               required
+              type=".pdf"
             />
 
             <FileField
@@ -684,6 +746,7 @@ export default function Application() {
               file={files.nationalID}
               onChange={handleFileChange}
               required
+              type=".pdf"
             />
 
             <FileField
@@ -693,7 +756,7 @@ export default function Application() {
               file={files.personalPhoto}
               onChange={handleFileChange}
               required
-              type=".jpg,.jpeg,.png,.webp"
+              type=".pdf"
             />
           </div>
 
@@ -766,7 +829,9 @@ export default function Application() {
         </form>
       </div>
     </main>
-  );
+  ):
+    <NotAvailable/>
+  ;
 }
 
 /* =========================================================
@@ -840,8 +905,9 @@ function SelectField({
         <option value="">—</option>
 
         {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
+          <option key={option.value} value={option.value}>
+            {option.label}
+            {console.log(option.value)}
           </option>
         ))}
       </select>
@@ -874,7 +940,7 @@ function FileField({ name, label, hint, file, onChange, required = false ,type="
         <small>
           {file
             ? `${Math.round(file.size / 1024)} KB`
-            : `${t("form.pdfHint")} · max ${hint}`}
+            : type === ".pdf" ? `${t("form.pdfHint")} · max ${hint}` : `${t("form.imgOrPdf")} · max ${hint}`}
         </small>
 
         <input
