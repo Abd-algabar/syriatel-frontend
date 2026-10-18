@@ -368,6 +368,8 @@ const initialForm = {
   previous: "",
   source: "",
   comments: "",
+  nationalId:"",
+
 };
 
 /*
@@ -460,6 +462,7 @@ export default function Application() {
     formData.append("field_of_study",form.FieldOfStudy)
     formData.append("academic_major",form.AcademicMajor)
     formData.append("technical_skills",form.TechnicalSkills)
+    formData.append("national_id_number",form.nationalId)
     console.log("FormData:", formData);
     console.group("================ APPLICATION DATA ================");
 
@@ -709,6 +712,16 @@ export default function Application() {
               required
             />
 
+             <TextField
+              name="nationalId"
+              label={t("form.nationalIdNumber")}
+              placeholder={"14XXXXXXXXX"}
+              type="number"
+              value={form.nationalId}
+              onChange={handleChange}
+              required
+            />
+
             <TextField
               name="TechnicalSkills"
               label={t("form.skills")}
@@ -716,9 +729,14 @@ export default function Application() {
               value={form.TechnicalSkills}
               onChange={handleChange}
               required
+              
+              
             />
 
             {/* Required documents */}
+            <div>
+
+            </div>
             <FileField
               name="academicQualification"
               label={t("form.qualification")}

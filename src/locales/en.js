@@ -88,6 +88,7 @@ const en = {
     submitting: "Submitting...",
     yes: "Yes",
     no: "No",
+    nationalIdNumber:" National ID Number",
     cityOptions: [
       {
         value: "damascus",

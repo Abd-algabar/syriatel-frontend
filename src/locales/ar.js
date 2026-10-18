@@ -89,6 +89,7 @@ const ar = {
     submitting: "جارٍ الإرسال...",
     yes: "نعم",
     no: "لا",
+    nationalIdNumber:"الرقم الوطني",
     cityOptions: [
       {
         value: "damascus",
