@@ -489,7 +489,7 @@ export default function Application() {
 
     try {
       const res = await axios.post(
-        "https://syriateltms-production.up.railway.app/api/v1/application",
+        "https://syriatel.houseofgeniuses.tech/api/v1/application",
         formData,
       );
       console.log("res:", res);
@@ -527,7 +527,7 @@ export default function Application() {
   const checkFormAvailability = async () => {
     try {
       const response = await axios.get(
-        "https://syriateltms-production.up.railway.app/api/v1/training_program/openProgram",
+        "https://syriatel.houseofgeniuses.tech/api/v1/training_program/openProgram",
       );
       setFormAvailable(response.data.data==null?false:true);
       console.log("checkdata",response.data.data)
