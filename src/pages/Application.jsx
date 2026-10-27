@@ -420,8 +420,18 @@ export default function Application() {
    * No API request is made here.
    * The backend integration will be added later.
    */
+  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
   const handleFileChange = (event, fieldName) => {
     const selectedFile = event.target.files?.[0] || null;
+
+
+      if (!selectedFile) return;
+
+  if (selectedFile.size > MAX_FILE_SIZE) {
+    toast.error("حجم الملف يجب ألا يتجاوز 5 MB");
+    event.target.value = "";
+    return;
+  }
 
     setFiles((previousFiles) => ({
       ...previousFiles,
